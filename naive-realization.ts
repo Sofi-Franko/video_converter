@@ -1,5 +1,5 @@
-const {spawn} = require('child_process');
-const inquirer = require("inquirer")
+import {spawn} from 'child_process';
+import inquirer from "inquirer"
 
 (async function convert() {
 
