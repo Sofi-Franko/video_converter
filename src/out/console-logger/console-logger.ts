@@ -15,11 +15,11 @@ class ConsoleLogger implements IStreamLogger {
   }
 
   error(...args: any[]): void {
-    console.log(`Error --->  ${JSON.stringify(args)}`)
+    console.log(args.toString())
   }
 
   log(...args: any[]): void {
-    console.log(`Data --->  ${JSON.stringify(args)}`)
+    console.log(args.toString())
   }
 }
 

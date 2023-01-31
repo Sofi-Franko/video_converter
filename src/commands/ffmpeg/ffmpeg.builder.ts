@@ -3,7 +3,7 @@ export class FfmpegBuilder {
   private options: Map<string, string> = new Map()
 
   constructor() {
-    this.options.set("-c:v", "libx264") // default kodak
+    this.options.set("-c:v", "libx264") // default codecs
   }
 
   addPath(inputPath: string): this {
@@ -11,7 +11,7 @@ export class FfmpegBuilder {
     return this
   }
 
-  addSize(width: string, height: string): this {
+  addSize(width: number, height: number): this {
     this.options.set("-s", `${width}x${height}`);
     return this
   }
