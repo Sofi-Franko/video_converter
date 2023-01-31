@@ -21,18 +21,20 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
     const height = await this.promptService.input<number>("Height", "number");
     const path = await this.promptService.input<string>("Insert path", "input");
     const name = await this.promptService.input<string>("New name", "input");
+    const inNeededAudio = await this.promptService.input<boolean>("Do you need separated audio track?", "confirm");
 
-    return {width, height, path, name}
+    return {width, height, path, name, inNeededAudio}
   }
 
   protected build(values: IFfmpegInput): ICommandExecFfmpeg {
-    const {width, height, path, name} = values
+    const {width, height, path, name, inNeededAudio} = values
 
     const outputPath = this.fileService.getFilePath(path, name, "mp4");
 
-    const args = (new FfmpegBuilder()).addPath(path).addSize(width, height).build(outputPath)
+    const params = (new FfmpegBuilder()).addPath(path).addSize(width, height)
+    if (inNeededAudio) params.addAudioFile(name);
 
-    return {command: "ffmpeg", args, outputPath}
+    return {command: "ffmpeg", args: params.build(outputPath), outputPath}
   }
 
   protected async spawn(params: ICommandExecFfmpeg): Promise<ChildProcessWithoutNullStreams> {

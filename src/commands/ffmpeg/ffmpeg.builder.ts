@@ -16,6 +16,11 @@ export class FfmpegBuilder {
     return this
   }
 
+  addAudioFile(name: string): this {
+    this.options.set("-vn", `${name}.ogg`);
+    return this
+  }
+
   build(outputPath: string): string[] {
     if (!this.inputPath) {
       throw new Error("No input path defined!")

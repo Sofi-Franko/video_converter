@@ -13,7 +13,7 @@ export class FileService {
 
   getFilePath(path: string, name: string, extension: string): string {
     if (!isAbsolute(path)) {
-      path = join(__dirname + "/" + path)
+      throw new Error("For now only absolute path of file is required :(")
     }
 
     return join(dirname(path) + "/" + name + "." + extension)

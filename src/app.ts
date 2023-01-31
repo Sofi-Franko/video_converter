@@ -3,7 +3,7 @@ import {FfmpegExecutor} from "./commands/ffmpeg/ffmpeg.executor.js";
 
 export class App {
   async run() {
-    new FfmpegExecutor(consoleLogger).execute()
+    await new FfmpegExecutor(consoleLogger).execute()
   }
 }
 
